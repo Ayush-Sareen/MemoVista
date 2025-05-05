@@ -51,6 +51,16 @@ const App = () => {
 
     setResults(newResults);
     setCurrentStep(0);
+    toast.success('Simulation Sucessfull !', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
 
   useEffect(() => {
@@ -151,8 +161,10 @@ theme="dark"
 />
       <Navbar />
       <div className="p-6 max-w-4xl mx-auto space-y-8">
-        <h1 className="text-3xl text-teal-100 text-center">Welcome To Virtual Memory Simulator !!!</h1>
+      <h1 className=' text-7xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>Virtual Memory Simulator</h1>
+        <div className="border p-4 rounded-2xl shadow bg-gray-800">
 
+        <div className="text-2xl font-semibold mb-4 text-center text-teal-400 ">ENTER DATA</div>
         <div className="flex flex-wrap gap-4 items-center justify-center">
           <label className="font-semibold" htmlFor="referenceString">Reference String:</label>
           <input
@@ -161,14 +173,14 @@ theme="dark"
             value={referenceString}
             onChange={(e) => setReferenceString(e.target.value)}
             className="border px-3 py-1 flex-1 rounded-2xl"
-          />
+            />
           <label className="font-semibold" htmlFor="frames">Frames:</label>
           <input
             type="number"
             value={frames}
             onChange={(e) => setFrames(e.target.value)}
             className="border px-3 py-1 w-24 rounded-2xl"
-          />
+            />
           <div className="flex gap-4 items-center">
             <label className="font-medium">Select Algorithm:</label>
             <select
@@ -178,7 +190,7 @@ theme="dark"
                 setCurrentStep(0);
               }}
               className="border px-3 py-1 rounded-full"
-            >
+              >
               {algorithms.map((algo) => (
                 <option key={algo} value={algo} className="text-gray-900">
                   {algo}
@@ -192,10 +204,11 @@ theme="dark"
               Simulate !
             </span>
           </button>
+              </div>
         </div>
 
         {results[selectedAlgorithm] && (
-          <div className="border p-4 rounded-2xl shadow mt-6">
+          <div className="border p-4 rounded-2xl shadow mt-6 bg-gray-800">
             <h2 className="text-3xl text-teal-400 font-semibold mb-2 text-center">{selectedAlgorithm}</h2>
             <p>
               <strong>Page Faults:</strong> {pageFaults}<br />
