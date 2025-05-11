@@ -2,7 +2,7 @@
 
 **MemoVista** is a virtual memory simulator that visually demonstrates **page replacement algorithms** and the **Translation Lookaside Buffer (TLB)**. It is designed to help students and developers understand how operating systems manage memory using concepts like FIFO, LRU, and Optimal algorithms.
 
-🔗 **Live Demo:** [https://memovista.netlify.app/](https://memovista.netlify.app/)
+ **WebSite Link:** [https://memovista.netlify.app/](https://memovista.netlify.app/)
 
 ---
 
