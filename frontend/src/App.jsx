@@ -41,7 +41,7 @@ const App = () => {
     const newResults = {};
 
     for (const algo of algorithms) {
-      const res = await axios.post("http://127.0.0.1:5000/simulate", {
+      const res = await axios.post("https://memovista.onrender.com/simulate", {
         algorithm: algo,
         reference_string: refList,
         frames: parseInt(frames),
