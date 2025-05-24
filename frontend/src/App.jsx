@@ -35,9 +35,9 @@ const App = () => {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
     }
-    const refList = referenceString.split(",").map(num => parseInt(num.trim()));
+    const refList = referenceString.split(",").map(num => parseInt(num.trim()));//convert to array of integers
     const newResults = {};
 
     for (const algo of algorithms) {
@@ -60,18 +60,18 @@ const App = () => {
       draggable: true,
       progress: undefined,
       theme: "dark",
-      });
+    });
   };
 
-  useEffect(() => {
-    simulateAll();
-  }, []);
+  // useEffect(() => {
+  //   simulateAll();
+  // }, []);
 
   const goToNextStep = () => {
     if (currentStep < results[selectedAlgorithm]?.memory_states.length - 1) {
       setCurrentStep(currentStep + 1);
     }
-    else{
+    else {
       toast.success('Simulation Completed !', {
         position: "bottom-right",
         autoClose: 5000,
@@ -111,7 +111,7 @@ const App = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            });
+          });
         }
       }, 1000);
       setAutoInterval(intervalId);
@@ -140,7 +140,7 @@ const App = () => {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
     }
   };
 
@@ -148,63 +148,65 @@ const App = () => {
 
     <div className="bg-gray-900 text-gray-300 ">
       <ToastContainer
-position="bottom-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick={false}
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Navbar />
       <div className="p-6 max-w-4xl mx-auto space-y-8">
-      <h1 className=' text-7xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>Virtual Memory Simulator</h1>
+        <h1 className=' text-7xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>Virtual Memory Simulator</h1>
         <div className="border p-4 rounded-2xl shadow bg-gray-800">
-
-        <div className="text-2xl font-semibold mb-4 text-center text-teal-400 ">ENTER DATA</div>
-        <div className="flex flex-wrap gap-4 items-center justify-center">
-          <label className="font-semibold" htmlFor="referenceString">Reference String:</label>
-          <input
-            id="referenceString"
-            placeholder="Enter Reference String (1,3,0,3,5)"
-            value={referenceString}
-            onChange={(e) => setReferenceString(e.target.value)}
-            className="border px-3 py-1 flex-1 rounded-2xl"
-            />
-          <label className="font-semibold" htmlFor="frames">Frames:</label>
-          <input
-            type="number"
-            value={frames}
-            onChange={(e) => setFrames(e.target.value)}
-            className="border px-3 py-1 w-24 rounded-2xl"
-            />
-          <div className="flex gap-4 items-center">
-            <label className="font-medium">Select Algorithm:</label>
-            <select
-              value={selectedAlgorithm}
+          <div className="text-2xl font-semibold mb-4 text-center text-teal-400 ">ENTER DATA</div>
+          <div className="flex flex-wrap gap-4 items-center justify-center">
+            <label className="font-semibold" htmlFor="referenceString">Reference String:</label>
+            <input
+              id="referenceString"
+              placeholder="Enter Reference String (1,3,0,3,5)"
+              value={referenceString}
               onChange={(e) => {
-                setSelectedAlgorithm(e.target.value);
-                setCurrentStep(0);
+                setReferenceString(e.target.value);
+                setResults({});
               }}
-              className="border px-3 py-1 rounded-full"
+              className="border px-3 py-1 flex-1 rounded-2xl"
+            />
+            <label className="font-semibold" htmlFor="frames">Frames:</label>
+            <input
+              type="number"
+              value={frames}
+              onChange={(e) => setFrames(e.target.value)}
+              className="border px-3 py-1 w-24 rounded-2xl"
+            />
+            <div className="flex gap-4 items-center">
+              <label className="font-medium">Select Algorithm:</label>
+              <select
+                value={selectedAlgorithm}
+                onChange={(e) => {
+                  setSelectedAlgorithm(e.target.value);
+                  setCurrentStep(0);
+                }}
+                className="border px-3 py-1 rounded-full"
               >
-              {algorithms.map((algo) => (
-                <option key={algo} value={algo} className="text-gray-900">
-                  {algo}
-                </option>
-              ))}
+                {algorithms.map((algo) => (
+                  <option key={algo} value={algo} className="text-gray-900">
+                    {algo}
+                  </option>
+                ))}
 
-            </select>
+              </select>
+            </div>
+            <button onClick={simulateAll} className="relative w-1/2 inline-flex text-lg items-center justify-center p-0.5 mb-2 me-2 overflow-hidden  font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+              <span className="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                Simulate !
+              </span>
+            </button>
           </div>
-          <button onClick={simulateAll} className="relative w-1/2 inline-flex text-lg items-center justify-center p-0.5 mb-2 me-2 overflow-hidden  font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-            <span className="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-              Simulate !
-            </span>
-          </button>
-              </div>
         </div>
 
         {results[selectedAlgorithm] && (
@@ -280,28 +282,28 @@ theme="dark"
         </div>
 
         <div className="bg-teal-950 p-4">
-        <div className="m-4 text-center">
-          <p className="text-gray-200 text-2xl">Comparision Graph</p>
-        </div>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart
-            data={algorithms.map((algo) => ({
-              name: algo,
-              faults: results[algo]?.page_faults || 0,
-            }))} 
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" label={{ value: "Algorithm", position: "insideBottom", offset: -5 }} />
-            <YAxis allowDecimals={false} label={{ value: "Page Faults", angle: -90, position: "insideLeft" }} />
-            <Tooltip />
-            <Bar dataKey="faults" fill="#3182CE" />
-          </BarChart>
-        </ResponsiveContainer>
+          <div className="m-4 text-center">
+            <p className="text-gray-200 text-2xl">Comparision Graph</p>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+              data={algorithms.map((algo) => ({
+                name: algo,
+                faults: results[algo]?.page_faults || 0,
+              }))}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" label={{ value: "Algorithm", position: "insideBottom", offset: -5 }} />
+              <YAxis allowDecimals={false} label={{ value: "Page Faults", angle: -90, position: "insideLeft" }} />
+              <Tooltip />
+              <Bar dataKey="faults" fill="#3182CE" />
+            </BarChart>
+          </ResponsiveContainer>
 
-        <div className="text-center mt-4">
-          <p className="text-gray-300">The Above Chart Shows The Number Of Page Faults For Each Algorithm.</p>
+          <div className="text-center mt-4">
+            <p className="text-gray-300">The Above Chart Shows The Number Of Page Faults For Each Algorithm.</p>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
