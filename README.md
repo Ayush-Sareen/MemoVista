@@ -12,7 +12,7 @@
   - FIFO (First-In-First-Out)
   - LRU (Least Recently Used)
   - Optimal
--  Includes **TLB Simulation** with Most Frequently Used (MFU) policy
+-  Includes **TLB Simulation** with Least Recent Used (LRU) policy
 -  Tracks:
   - Page Faults
   - TLB Hits
